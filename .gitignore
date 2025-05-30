@@ -1,0 +1,8 @@
+node_modules
+.env*
+!.env.example
+*data
+*service_account*.json
+backup_docker_logs.sh
+backup_logs
+generated/prisma/
