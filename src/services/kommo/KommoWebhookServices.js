@@ -32,7 +32,9 @@ export default class KommoWebhookServices extends KommoServices {
       } else {
         styled.warning('[KommoWebhookServices.messageReceived] - Nenhuma hash identificada corretamente na mensagem.');
       }
+    } else {
+      styled.info('[KommoWebhookServices.messageReceived] - Mensagem não contém hash, ignorando...');
     }
-    return { code: 200, response: res };
+    return { code: 200 };
   }
 }

@@ -16,8 +16,10 @@ export default class MarketingTrackingRepository extends BaseRepository {
   }
 
   async findOrCreateTracking(gclientid, hash, data) {
-    return await this.model.findOrCreate({
-      where: { gclientid, hash },
+    return await this.findOrCreate({
+      where: {
+        hash_gclientid: { gclientid, hash }
+      },
       update: { updated_at: new Date(), ...data },
       create: { gclientid, hash, created_at: new Date(), updated_at: new Date(), ...data },
     });

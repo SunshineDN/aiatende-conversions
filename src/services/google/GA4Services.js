@@ -15,12 +15,14 @@ export default class GA4Services {
   async sendEvent({ client_id, lead_id = '', events = [], user_properties = {} } = {}) {
     const payload = {
       client_id,
-      ...(lead_id && { user_id: lead_id }),
+      ...(lead_id && { user_id: lead_id.toString() }),
       events: events.map(event => ({ name: event })),
       user_properties: Object.fromEntries(
         Object.entries(user_properties).map(([key, value]) => ([key, { value }]))
       )
     };
+
+    styled.info(`[GA4Services.sendEvent] Sending events: ${JSON.stringify(payload)}`);
 
     const options = {
       method: 'POST',
@@ -28,15 +30,16 @@ export default class GA4Services {
       data: JSON.stringify(payload),
     };
 
-    const response = await axios(options)
+    const response = await axios(options);
+    styled.success(`[GA4Services.sendEvent] Response status: ${response.status}`);
     return response;
   }
 
   async sendMinorCustomLeadEvent({ client_id, events = [], lead_id = '', first_name, last_name = '', phone } = {}) {
     const user_properties = {
-      first_name: { value: first_name },
-      ...(last_name && { last_name: { value: last_name } }),
-      phone_number: { value: phone },
+      first_name,
+      ...(last_name && { last_name }),
+      phone_number: phone,
     };
 
     const response = await this.sendEvent({
@@ -51,12 +54,12 @@ export default class GA4Services {
 
   async sendFullCustomLeadEvent({ client_id, events = [], lead_id = '', first_name, last_name, phone, email, birth_date, neighborhood } = {}) {
     const user_properties = {
-      first_name: { value: first_name },
-      last_name: { value: last_name },
-      phone_number: { value: phone },
-      email: { value: email },
-      birth_date: { value: birth_date },
-      neighborhood: { value: neighborhood },
+      first_name,
+      last_name,
+      phone_number: phone,
+      email,
+      birth_date,
+      neighborhood,
     };
 
     const response = await this.sendEvent({

@@ -14,7 +14,7 @@ export default class TrackingDataServices {
 
   async handleWebhookReceived(query, hash) {
 
-    const { gclientid, hash: utmHash, text, ...utms} = this.handleUTMSeparator(query, hash);
+    const { gclientid, hash: utmHash, text, ...utms } = this.handleUTMSeparator(query, hash);
 
     if (!gclientid) {
       styled.error("gclientid not found");
@@ -24,7 +24,7 @@ export default class TrackingDataServices {
     await this.#marketing_tracking.findOrCreateTracking(gclientid, hash, utms);
     styled.success('UTM separated and saved in the database');
 
-    const custom_fields_values = await this.handleCustomFields({ gclientid, hash, ...utms });
+    const custom_fields_values = await this.handleCustomFields({ utms: { gclientid, hash, ...utms } });
     styled.success('Custom fields values created');
 
     const kommoWebhookUtils = new KommoWebhookUtils({ pipelines: await this.#kommo.getPipelines() });
@@ -43,7 +43,7 @@ export default class TrackingDataServices {
       custom_fields_values
     });
 
-    return utms.text;
+    return text;
   }
 
   handleUTMSeparator(obj, hash) {

@@ -28,7 +28,7 @@ app.use('/api-docs', apiDocs);
 app.use('/content', detectContent);
 app.use('/webhook', webhook);
 app.use('/whatsapp', tracking_data);
-app.use('/conversions/ga4', ga4_conversions);
+app.use('/v1/ga4', ga4_conversions);
 
 app.use((_, res) => {
   res.status(404).json({ error: 'Endpoint não encontrado!' });

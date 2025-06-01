@@ -9,10 +9,9 @@ import MarketingTrackingRepository from "./src/repositories/MarketingTrackingRep
 
 const main = async () => {
 
-  const repo = new MarketingTrackingRepository();
-  const item = await repo.findOne({ where: { hash: "12f22c84" } });
-  styled.infodir(item)
-
+  const number = 24410353;
+  const string = number.toString();
+  console.log(string)
   // const measurement_id = process.env.GA4_MEASUREMENT_ID;
   // const secret_api = process.env.GA4_API_SECRET;
 
@@ -26,18 +25,18 @@ const main = async () => {
   // const dataNascimentoSHA256 = await EncryptUtils.populateSensitiveUserData('11/03/2003');
   // const neighborhood = 'Candeias';
 
-  // const client_id = '166549136.1721927920';
+  // const client_id = '813830295.1743001344';
   // const payload = {
   //   client_id,
-  //   user_id: '19030890',
+  //   user_id: '24410353',
   //   events: [
   //     {
-  //       name: 'test_event',
+  //       name: 'lead_created',
   //     }
   //   ],
   //   user_properties: {
   //     gender: {
-  //       value: "female"
+  //       value: "male"
   //     },
   //     first_name: {
   //       value: firstNameSHA256,

@@ -20,7 +20,7 @@ export default class TrackingDataController {
       const hash = StaticUtils.generateSimpleHash();
       const text = await this.tracking_data.handleWebhookReceived(query, hash);
       if (text == null) {
-        styled.warning("gclientid not found");
+        styled.warning("text not found");
         res.redirect(`https://wa.me/${whatsAppNumber}?text=Olá, tudo bem?`);
       } else {
         styled.success('Webhook received and handled');

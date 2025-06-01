@@ -42,7 +42,7 @@ export default class LeadUtils {
     }
 
     const { values } = field;
-    const { value } = values.filter(value => value.enum_code === 'WORK')[0] || null;
+    const { value } = values?.filter(value => value?.enum_code === 'WORK')[0] || null;
     if (!value) {
       return null;
     }
@@ -58,7 +58,7 @@ export default class LeadUtils {
     }
 
     const { values } = field;
-    const { value } = values.filter(value => value.enum_code === 'WORK')[0] || null;
+    const { value } = values?.filter(value => value?.enum_code === 'WORK')[0] || null;
     if (!value) {
       return null;
     }
