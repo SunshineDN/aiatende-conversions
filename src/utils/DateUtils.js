@@ -70,6 +70,15 @@ export default class DateUtils {
     return dayjs.unix(seconds).tz('America/Sao_Paulo').format(format);
   }
 
+  static secondsToFormatDate(seconds) {
+    const date = new Date(seconds * 1000);
+    
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses começam do zero
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`; // Retorna a data formatada como 'DD/MM/YYYY'
+  }
+
   /**
    * Converte segundos em uma data
    * @param {number} seconds - Segundos desde 01/01/1970

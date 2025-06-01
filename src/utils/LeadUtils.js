@@ -48,4 +48,20 @@ export default class LeadUtils {
     }
     return StaticUtils.removePhoneNonNumericCharacters(value);
   }
+  
+  static getEmail({ contact } = {}) {
+    const { custom_fields_values } = contact;
+    const field = custom_fields_values?.filter(field => field?.field_code === 'EMAIL')[0] || null;
+
+    if (!field) {
+      return null;
+    }
+
+    const { values } = field;
+    const { value } = values.filter(value => value.enum_code === 'WORK')[0] || null;
+    if (!value) {
+      return null;
+    }
+    return value;
+  }
 }

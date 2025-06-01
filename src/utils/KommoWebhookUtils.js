@@ -32,23 +32,6 @@ export default class KommoWebhookUtils extends KommoUtils {
 		}
 	}
 
-	async handleWebhookDuplicate(lead) {
-		styled.function('[KommoWebhookUtils.handleWebhookDuplicate]');
-		const custom_fields = lead.custom_fields_values
-		styled.infodir(custom_fields)
-		const id_backup = custom_fields.filter((field) => field.field_id == 1379333)
-		styled.infodir(id_backup)
-		const id = id_backup[0].values[0].value;
-		const utms = await this.#marketing_tracking.findOne({ where: { hash: id } })
-		styled.info("utms: ")
-		styled.infodir(utms)
-		const custom_field_updated = this.handleCustomFields(utms)
-		styled.infodir(custom_field_updated)
-		const update = await this.kommo.updateLead({ id: lead.id, custom_fields_values: custom_field_updated })
-		styled.infodir(update)
-		return;
-	}
-
 	async handleCustomFields(utms) {
 
 		this.leads_custom_fields = await this.kommo.getLeadsCustomFields();

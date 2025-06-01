@@ -1,7 +1,9 @@
 import { webcrypto } from 'crypto'
 
 export default class EncryptUtils {
-  static async populateSensitiveUserData(value) {
+  static async populateSensitiveUserData(value = '') {
+    if (!value) return null; // Retorna null se o valor for vazio ou não definido
+
     const { subtle } = webcrypto;
 
     const encoder = new TextEncoder();

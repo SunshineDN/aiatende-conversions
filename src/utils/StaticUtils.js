@@ -266,4 +266,18 @@ export default class StaticUtils {
                 return typeof prop === 'function' && name !== 'constructor' && name === fn_name;
             });
     };
+
+    /**
+     * Divide um nome completo em primeiro nome e sobrenome
+     * @param {string} name Nome completo a ser dividido
+     * @return {object} Objeto contendo o primeiro nome e o sobrenome
+     */
+    static splitName(name) {
+        const firstName = name.split(' ')[0];
+        const lastName = name.split(' ')?.slice(1)?.join(' ') || null; // Juntar o restante do nome como sobrenome
+        return {
+            firstName,
+            ...(lastName && { lastName })
+        };
+    }
 }
