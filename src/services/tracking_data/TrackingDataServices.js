@@ -47,19 +47,24 @@ export default class TrackingDataServices {
 
   handleUTMSeparator(obj, hash) {
     const utms = {
-      utm_content: obj.utm_content,
-      utm_medium: obj.utm_medium,
       utm_campaign: obj.utm_campaign,
-      utm_source: obj.utm_source,
+      utm_adgroup: obj.utm_adgroup,
+      utm_content: obj.utm_content,
       utm_term: obj.utm_term,
+      utm_medium: obj.utm_medium,
+      utm_source: obj.utm_source,
+      utm_device: obj.utm_device,
+      utm_network: obj.utm_network,
+      utm_position: obj.utm_position,
+      utm_placement: obj.utm_placement,
       utm_referrer: obj.utm_referrer,
       referrer: obj.referrer,
       gclientid: obj.gclientid,
       gclid: obj.gclid,
       fbclid: obj.fbclid,
       ga_utm: obj.ga_utm,
-      fbp: obj.fbp,
       fbc: obj.fbc,
+      fbp: obj.fbp,
       text: obj.text || "",
       hash: hash,
     }
