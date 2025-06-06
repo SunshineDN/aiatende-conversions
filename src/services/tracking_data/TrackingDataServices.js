@@ -13,7 +13,6 @@ export default class TrackingDataServices {
   }
 
   async handleWebhookReceived(query, hash) {
-
     const { gclientid, hash: utmHash, text, ...utms } = this.handleUTMSeparator(query, hash);
 
     if (!gclientid) {
@@ -68,23 +67,27 @@ export default class TrackingDataServices {
   }
 
   async handleCustomFields({ utms }) {
-
     const kommoWebhookUtils = new KommoWebhookUtils({ leads_custom_fields: await this.#kommo.getLeadsCustomFields() });
 
     const track_message_field = kommoWebhookUtils.findLeadsFieldByName('track message');
-    const utm_content_field = kommoWebhookUtils.findLeadsFieldByName('utm_content');
-    const utm_medium_field = kommoWebhookUtils.findLeadsFieldByName('utm_medium');
     const utm_campaign_field = kommoWebhookUtils.findLeadsFieldByName('utm_campaign');
-    const utm_source_field = kommoWebhookUtils.findLeadsFieldByName('utm_source');
+    const utm_adgroup_field = kommoWebhookUtils.findLeadsFieldByName('utm_adgroup');
+    const utm_content_field = kommoWebhookUtils.findLeadsFieldByName('utm_content');
     const utm_term_field = kommoWebhookUtils.findLeadsFieldByName('utm_term');
+    const utm_medium_field = kommoWebhookUtils.findLeadsFieldByName('utm_medium');
+    const utm_source_field = kommoWebhookUtils.findLeadsFieldByName('utm_source');
+    const utm_device_field = kommoWebhookUtils.findLeadsFieldByName('utm_device');
+    const utm_network_field = kommoWebhookUtils.findLeadsFieldByName('utm_network');
+    const utm_position_field = kommoWebhookUtils.findLeadsFieldByName('utm_position');
+    const utm_placement_field = kommoWebhookUtils.findLeadsFieldByName('utm_placement');
     const utm_referrer_field = kommoWebhookUtils.findLeadsFieldByName('utm_referrer');
     const referrer_field = kommoWebhookUtils.findLeadsFieldByName('referrer');
     const gclientid_field = kommoWebhookUtils.findLeadsFieldByName('gclientid');
     const gclid_field = kommoWebhookUtils.findLeadsFieldByName('gclid');
     const fbclid_field = kommoWebhookUtils.findLeadsFieldByName('fbclid');
     const ga_utm_field = kommoWebhookUtils.findLeadsFieldByName('ga_utm');
-    const fbp_field = kommoWebhookUtils.findLeadsFieldByName('_fbp');
     const fbc_field = kommoWebhookUtils.findLeadsFieldByName('_fbc');
+    const fbp_field = kommoWebhookUtils.findLeadsFieldByName('_fbp');
 
     const custom_fields_values = []
 
@@ -94,28 +97,6 @@ export default class TrackingDataServices {
         values: [
           {
             value: utms.hash
-          }
-        ]
-      });
-    }
-
-    if (utms.utm_content && utm_content_field) {
-      custom_fields_values.push({
-        field_id: utm_content_field.id,
-        values: [
-          {
-            value: utms.utm_content
-          }
-        ]
-      });
-    }
-
-    if (utms.utm_medium && utm_medium_field) {
-      custom_fields_values.push({
-        field_id: utm_medium_field.id,
-        values: [
-          {
-            value: utms.utm_medium
           }
         ]
       });
@@ -132,12 +113,23 @@ export default class TrackingDataServices {
       });
     }
 
-    if (utms.utm_source && utm_source_field) {
+    if (utms.utm_adgroup && utm_adgroup_field) {
       custom_fields_values.push({
-        field_id: utm_source_field.id,
+        field_id: utm_adgroup_field.id,
         values: [
           {
-            value: utms.utm_source
+            value: utms.utm_adgroup
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_content && utm_content_field) {
+      custom_fields_values.push({
+        field_id: utm_content_field.id,
+        values: [
+          {
+            value: utms.utm_content
           }
         ]
       });
@@ -149,6 +141,72 @@ export default class TrackingDataServices {
         values: [
           {
             value: utms.utm_term
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_medium && utm_medium_field) {
+      custom_fields_values.push({
+        field_id: utm_medium_field.id,
+        values: [
+          {
+            value: utms.utm_medium
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_source && utm_source_field) {
+      custom_fields_values.push({
+        field_id: utm_source_field.id,
+        values: [
+          {
+            value: utms.utm_source
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_device && utm_device_field) {
+      custom_fields_values.push({
+        field_id: utm_device_field.id,
+        values: [
+          {
+            value: utms.utm_device
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_network && utm_network_field) {
+      custom_fields_values.push({
+        field_id: utm_network_field.id,
+        values: [
+          {
+            value: utms.utm_network
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_position && utm_position_field) {
+      custom_fields_values.push({
+        field_id: utm_position_field.id,
+        values: [
+          {
+            value: utms.utm_position
+          }
+        ]
+      });
+    }
+
+    if (utms.utm_placement && utm_placement_field) {
+      custom_fields_values.push({
+        field_id: utm_placement_field.id,
+        values: [
+          {
+            value: utms.utm_placement
           }
         ]
       });
@@ -220,6 +278,17 @@ export default class TrackingDataServices {
       });
     }
 
+    if (utms.fbc && fbc_field) {
+      custom_fields_values.push({
+        field_id: fbc_field.id,
+        values: [
+          {
+            value: utms.fbc
+          }
+        ]
+      });
+    }
+
     if (utms.fbp && fbp_field) {
       custom_fields_values.push({
         field_id: fbp_field.id,
@@ -231,12 +300,12 @@ export default class TrackingDataServices {
       });
     }
 
-    if (utms.fbc && fbc_field) {
+    if (utms.new_param && new_param_field) {
       custom_fields_values.push({
-        field_id: fbc_field.id,
+        field_id: new_param_field.id,
         values: [
           {
-            value: utms.fbc
+            value: utms.new_param
           }
         ]
       });

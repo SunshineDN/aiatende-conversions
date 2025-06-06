@@ -23,24 +23,29 @@ model leads {
 }
 
 model marketing_tracking {
-  id           String   @id @default(uuid()) @db.Uuid
-  hash         String?  @db.VarChar(8)
-  gclientid    String?  @db.VarChar(255)
-  gclid        String?  @db.VarChar(255)
-  fbclid       String?  @db.VarChar(255)
-  ga_utm       String?  @db.VarChar(255)
-  fbp          String?  @db.VarChar(255)
-  fbc          String?  @db.VarChar(255)
-  utm_content  String?  @db.VarChar(255)
-  utm_medium   String?  @db.VarChar(255)
-  utm_campaign String?  @db.VarChar(255)
-  utm_source   String?  @db.VarChar(255)
-  utm_term     String?  @db.VarChar(255)
-  utm_referrer String?  @db.VarChar(255)
-  referrer     String?  @db.VarChar(255)
-  created_at   DateTime @default(now()) @db.Timestamptz(6)
-  updated_at   DateTime @default(now()) @updatedAt @db.Timestamptz(6)
-  leads        leads[]
+  id            String   @id @default(uuid()) @db.Uuid
+  hash          String?  @db.VarChar(8)
+  utm_campaign  String?  @db.VarChar(255)
+  utm_adgroup   String?  @db.VarChar(255)
+  utm_content   String?  @db.VarChar(255)
+  utm_term      String?  @db.VarChar(255)
+  utm_medium    String?  @db.VarChar(255)
+  utm_source    String?  @db.VarChar(255)
+  utm_device    String?  @db.VarChar(255)
+  utm_network   String?  @db.VarChar(255)
+  utm_position  String?  @db.VarChar(255)
+  utm_placement String?  @db.VarChar(255)
+  utm_referrer  String?  @db.VarChar(255)
+  referrer      String?  @db.VarChar(255)
+  gclientid     String?  @db.VarChar(255)
+  gclid         String?  @db.VarChar(255)
+  fbclid        String?  @db.VarChar(255)
+  ga_utm        String?  @db.VarChar(255)
+  fbc           String?  @db.VarChar(255)
+  fbp           String?  @db.VarChar(255)
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  leads         leads[]
 
   @@unique([hash, gclientid])
 }
